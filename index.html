@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Engrave On Ring — V6</title>
+<title>Engrave On Ring — V7 Corrected</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Abril+Fatface&family=Dancing+Script&family=Lobster&family=Lora&family=Pacifico&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -33,7 +33,6 @@
   .tool{display:flex; align-items:center; gap:8px; font-size:13px; white-space:nowrap;}
   .tool input[type="range"]{width:180px;}
   .tool .val{min-width:36px; text-align:right; font-variant-numeric:tabular-nums; color:var(--muted);}
-  /* font cards */
   .font-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px;}
   .font-card{
     border:1px solid var(--card-border); background:var(--card);
@@ -45,79 +44,49 @@
   .font-card:hover{transform:translateY(-1px);}
   .font-card.active{outline:2px solid var(--accent); background:#eef5ff;}
   .tip{font-size:12px; color:var(--muted); margin-top:10px;}
-
-  ```css
-  /* ========== START: Symbol Styles (เพิ่มส่วนนี้เข้าไป) ========== */
-  .symbol-section{
-    margin-top: 14px;
-  }
-  .symbol-label{
-    font-weight: 600; font-size: 13px; margin-bottom: 6px; display: block;
-  }
-  .symbol-grid{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  
+  /* CORRECTED: ลบ ```css ที่ไม่จำเป็นออก */
+  .symbol-section{ margin-top: 14px; }
+  .symbol-label{ font-weight: 600; font-size: 13px; margin-bottom: 6px; display: block; }
+  .symbol-grid{ display: flex; align-items: center; gap: 8px; }
   .symbol-btn{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    border: 1px solid var(--card-border);
-    background: var(--card);
-    border-radius: 8px;
-    padding: 6px 10px;
-    cursor: pointer;
-    user-select: none;
-    font-size: 16px;
-    min-width: 40px;
-    text-align: center;
-    transition: all .15s ease;
+    border: 1px solid var(--card-border); background: var(--card); border-radius: 8px;
+    padding: 6px 10px; cursor: pointer; user-select: none;
+    font-size: 16px; min-width: 40px; text-align: center; transition: all .15s ease;
   }
-  .symbol-btn:hover{
-    transform: translateY(-1px);
-    border-color: #b3b3b3;
-  }
-  .symbol-btn.copied {
-    background-color: #d4edda; /* สีเขียวอ่อน */
-    border-color: #c3e6cb;
-    color: #155724;
-  }
-  /* ========== END: Symbol Styles ========== */
+  .symbol-btn:hover{ transform: translateY(-1px); border-color: #b3b3b3; }
+  .symbol-btn.copied { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
 
-  /* Responsive - IMPROVED SECTION */
+  .ring-choice-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    margin-top: 8px; margin-bottom: 16px;
+  }
+  .ring-card {
+    border: 1px solid var(--card-border); background: var(--card);
+    border-radius: 10px; padding: 8px; cursor: pointer; user-select: none; transition: all .15s ease;
+  }
+  .ring-card img { width: 100%; display: block; border-radius: 6px; }
+  .ring-card:hover { transform: translateY(-1px); border-color: #b3b3b3; }
+  .ring-card.active { outline: 2px solid var(--accent); background: #eef5ff; }
+
   @media (max-width: 860px){
-    .wrap{
-      grid-template-columns:1fr;
-      padding:8px; /* [FIX] ลด Padding ด้านข้างสำหรับมือถือ */
-    }
-    .toolbar{
-      position:static;
-      margin-bottom:12px;
-      flex-wrap: wrap; /* [FIX] ทำให้ Toolbar ตัดบรรทัดได้เมื่อที่แคบ */
-      justify-content: center; /* [FIX] จัดให้อยู่กลางเมื่อตัดบรรทัด */
-      gap: 12px 18px;
-    }
-    .tool input[type="range"]{
-      width:150px; /* [TWEAK] ลดความกว้าง Slider เล็กน้อย */
-    }
-    .font-grid{
-      /* [MAJOR FIX] เปลี่ยนเป็น 2 คอลัมน์สำหรับมือถือ เพื่อให้กดง่ายขึ้น */
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .preview{
-      min-height:0; /* [TWEAK] ปรับ min-height ให้น้อยลง */
-      padding-top:20px;
-      padding-bottom:20px;
-    }
+    .wrap{ grid-template-columns:1fr; padding:8px; }
+    .toolbar{ position:static; margin-bottom:12px; flex-wrap: wrap; justify-content: center; gap: 12px 18px; }
+    .tool input[type="range"]{ width:150px; }
+    .font-grid{ grid-template-columns: repeat(2, 1fr); }
+    .preview{ min-height:0; padding-top:20px; padding-bottom:20px; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="panel" role="region" aria-label="Controls">
-    <h2>Engraving Preview</h2>
+    <h2>Engraving Controls</h2>
     <label for="engraveText">Text (max 34)</label>
     <input id="engraveText" type="text" maxlength="34" value="Forever & Ever">
-        <div class="symbol-section">
+    
+    <div class="symbol-section">
       <label class="symbol-label">Add a symbol:</label>
       <div id="symbolGrid" class="symbol-grid">
         <button class="symbol-btn" data-symbol="♡">♡</button>
@@ -128,6 +97,16 @@
     
     <div class="muted">Characters left: <strong id="charsLeft">0</strong></div>
 
+    <label>Choose a Ring</label>
+    <div id="ringChoiceGrid" class="ring-choice-grid">
+      <div class="ring-card active" data-src="ring.png" data-offset-y="0.58" data-radius-y="40" data-padding="0.12">
+        <img src="ring.png" alt="Classic Band">
+      </div>
+      <div class="ring-card" data-src="ring2.png" data-offset-y="0.52" data-radius-y="25" data-padding="0.15">
+        <img src="ring2.png" alt="Solitaire Ring">
+      </div>
+    </div>
+    
     <label>Choose a font</label>
     <div id="fontGrid" class="font-grid" role="listbox" aria-label="Choose a font">
       <div class="font-card" role="option" data-family="'Allura', cursive" style="font-family:'Allura', cursive">Allura</div>
@@ -145,7 +124,6 @@
 
   <div class="panel preview" role="region" aria-label="Preview">
     <div class="stage" id="stage">
-      <!-- Toolbar placed above the image -->
       <div class="toolbar" id="toolbar">
         <div class="tool">
           <span>Font size:</span>
@@ -158,9 +136,8 @@
           <span class="val">v: <span id="vOffsetUnit">-6</span></span>
         </div>
       </div>
-
       <img id="ringImg" src="ring.png" alt="ring image">
-      <svg class="overlay" id="overlaySVG" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <svg class="overlay" id="overlaySVG" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" preserveAspectRatio="xMidYMid meet">
         <defs><path id="engravePath" d="" fill="none"></path></defs>
         <text id="svgText" style="font-size:21px; text-anchor:middle; fill:#111;">
           <textPath id="textPath" href="#engravePath" startOffset="50%"></textPath>
@@ -178,17 +155,18 @@ const svg = document.getElementById('overlaySVG');
 const pathEl = document.getElementById('engravePath');
 const textPath = document.getElementById('textPath');
 const svgText = document.getElementById('svgText');
-
 const inputText = document.getElementById('engraveText');
 const charsLeft = document.getElementById('charsLeft');
-
 const fontSize = document.getElementById('fontSize');
 const fontSizeLabel = document.getElementById('fontSizeLabel');
-
 const vOffset = document.getElementById('vOffset');
 const vOffsetUnit = document.getElementById('vOffsetUnit');
-
 const fontGrid = document.getElementById('fontGrid');
+const symbolGrid = document.getElementById('symbolGrid');
+const ringChoiceGrid = document.getElementById('ringChoiceGrid');
+
+// CORRECTED: ลบการประกาศตัวแปรที่ซ้ำซ้อนทั้งหมดออก ให้เหลือแค่ชุดเดียว
+let currentRingSettings = {}; 
 
 /* initial UI values */
 charsLeft.textContent = MAX - (inputText.value?.length || 0);
@@ -203,29 +181,19 @@ function updateSVG() {
   svg.setAttribute('height', h);
   svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
-  // padding left/right to avoid edges of ring reflection
-  const padding = Math.max(18, w * 0.12);
+  const padding = Math.max(18, w * (currentRingSettings.padding || 0.12));
+  const baseCenterY = h * (currentRingSettings.offsetY || 0.58);
+  const ry = currentRingSettings.radiusY || 40;
 
-  const leftX = padding+60;
-  const rightX = w - (padding+60);
-
-  // base center chosen for this ring photo; vertical offset slider moves it
-  const baseCenterY = h * 0.58;
-
-  const v = Number(vOffset.value); // -60..60
-  // centerY computed in px: baseCenterY + (v/100) * h
-  const centerY = baseCenterY + (v/100) * h;
-
-  // rx: half width between left & right
+  const leftX = padding + 60;
+  const rightX = w - (padding + 60);
+  const v = Number(vOffset.value);
+  const centerY = baseCenterY + (v / 100) * h;
   const rx = (rightX - leftX) / 2;
-  // ry controlled by user for "tightness"
-  const ry = 40; // keep stable; users adjust size/vertical only here
 
-  // Build arc d (left to right). sweep-flag=0 so upper arc
   const d = `M ${leftX.toFixed(2)} ${centerY.toFixed(2)} A ${rx.toFixed(2)} ${ry.toFixed(2)} 0 0 1 ${rightX.toFixed(2)} ${centerY.toFixed(2)}`;
   pathEl.setAttribute('d', d);
 
-  // update text content and style
   let txt = inputText.value || '';
   if (txt.length > MAX) {
     txt = txt.slice(0, MAX);
@@ -233,8 +201,6 @@ function updateSVG() {
   }
   textPath.textContent = txt;
   charsLeft.textContent = MAX - txt.length;
-
-  // font size already bound
   svgText.style.fontSize = fontSize.value + 'px';
 }
 
@@ -253,53 +219,62 @@ fontGrid.addEventListener('click', (e)=>{
   updateSVG();
 });
 
-/* Default active font = first card */
-setActiveFontCard(fontGrid.querySelector('.font-card[data-family]'));
+/* Ring selection logic */
+function setActiveRingCard(card) {
+  [...ringChoiceGrid.querySelectorAll('.ring-card')].forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
 
-/* Listeners */
-inputText.addEventListener('input', updateSVG);
-fontSize.addEventListener('input', ()=>{ fontSizeLabel.textContent = fontSize.value; updateSVG(); });
-vOffset.addEventListener('input', ()=>{ vOffsetUnit.textContent = vOffset.value; updateSVG(); });
+  currentRingSettings = {
+    src: card.dataset.src,
+    offsetY: parseFloat(card.dataset.offsetY),
+    radiusY: parseFloat(card.dataset.radiusY),
+    padding: parseFloat(card.dataset.padding)
+  };
 
-/* image load and resize */
-img.addEventListener('load', ()=>{ setTimeout(updateSVG, 30); });
-window.addEventListener('resize', ()=>{ setTimeout(updateSVG, 50); });
+  img.src = currentRingSettings.src;
+  
+  img.onload = () => {
+    updateSVG();
+  };
+}
 
-/* ========== START: Symbol Copy Logic (เพิ่มส่วนนี้เข้าไป) ========== */
-const symbolGrid = document.getElementById('symbolGrid');
+ringChoiceGrid.addEventListener('click', (e) => {
+  const card = e.target.closest('.ring-card');
+  if (!card) return;
+  setActiveRingCard(card);
+});
 
+/* Symbol Copy Logic */
 symbolGrid.addEventListener('click', (e) => {
   const btn = e.target.closest('.symbol-btn');
   if (!btn) return;
-
   const symbol = btn.dataset.symbol;
-
-  // ใช้ Clipboard API ในการ copy
   navigator.clipboard.writeText(symbol).then(() => {
-    // ---- Feedback ให้ผู้ใช้รู้ว่า Copy สำเร็จ ----
     const originalText = btn.textContent;
     btn.textContent = 'Copied!';
     btn.classList.add('copied');
     btn.disabled = true;
-
-    // เปลี่ยนกลับเป็นเหมือนเดิมใน 1.5 วินาที
     setTimeout(() => {
       btn.textContent = originalText;
       btn.classList.remove('copied');
       btn.disabled = false;
     }, 1500);
-
   }).catch(err => {
     console.error('Failed to copy symbol: ', err);
-    // อาจจะแจ้งเตือนผู้ใช้ว่าไม่สำเร็จ
     alert('Could not copy symbol.');
   });
 });
-/* ========== END: Symbol Copy Logic ========== */
-  
+
+/* Listeners */
+inputText.addEventListener('input', updateSVG);
+fontSize.addEventListener('input', ()=>{ fontSizeLabel.textContent = fontSize.value; updateSVG(); });
+vOffset.addEventListener('input', ()=>{ vOffsetUnit.textContent = vOffset.value; updateSVG(); });
+window.addEventListener('resize', ()=>{ setTimeout(updateSVG, 50); });
+
 /* init */
-if (img.complete) { updateSVG(); }
-else { img.addEventListener('load', updateSVG); }
+setActiveFontCard(fontGrid.querySelector('.font-card[data-family]'));
+setActiveRingCard(ringChoiceGrid.querySelector('.ring-card.active'));
+
 </script>
 </body>
 </html>
